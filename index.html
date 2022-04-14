@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  	<div class="row">
+    <div class="col-sm" style="border: 1px solid #c9c9c9;">
+      <h3>Database</h3>
+          <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">id</th>
+          <th scope="col">lab_name</th>
+          <th scope="col">lab_surname</th>
+          <th scope="col">lab_pc</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in sopa_info %}
+        <tr>
+          <th scope="row">1</th>
+          <td>{{i.lab_id}}</td>
+          <td>{{i.lab_name}}</td>
+          <td>{{i.lab_last_name}}</td>
+          <td>{{i.lab_pc}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+      <hr>
+    </div>
+
+      <div class="col-sm" style="border: 1px solid #c9c9c9;">
+        <ul id="display_data">
+
+        </ul>
+
+        <script>
+          $(document).ready(function(){
+          setInterval(function(){
+            $.ajax({
+              type: 'GET',
+              url: "{% url 'getresults' %}",
+              success: function(response){
+                console.log(response);
+              },
+              error: function(response){
+                alert("error")
+              }
+            });
+          },1000);
+          });
+        </script>
+      </div>
+  </div>
+{% endblock body %}
